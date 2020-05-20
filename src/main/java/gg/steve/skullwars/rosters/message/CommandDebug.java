@@ -9,6 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum CommandDebug {
+    //
+    NOT_PLAYED_BEFORE("not-played-before"),
+    ALREADY_IN_FACTION("already-in-faction", "{player}", "{faction}"),
+    ALREADY_ON_ROSTER("already-on-roster", "{player}"),
+    ONLY_LEADER_CAN_EDIT("only-leader-can-edit"),
     // console debug
     ONLY_PLAYERS_ACCESSIBLE("only-player-accessible");
 
@@ -26,7 +31,7 @@ public enum CommandDebug {
             for (int i = 0; i < this.placeholders.size(); i++) {
                 line = line.replace(this.placeholders.get(i), data.get(i));
             }
-            receiver.sendMessage(ColorUtil.colorize(line));
+            receiver.sendRawMessage(ColorUtil.colorize(line));
         }
     }
 
@@ -36,7 +41,7 @@ public enum CommandDebug {
             for (int i = 0; i < this.placeholders.size(); i++) {
                 line = line.replace(this.placeholders.get(i), data.get(i));
             }
-            receiver.sendMessage(ColorUtil.colorize(line));
+//            receiver.(ColorUtil.colorize(line));
         }
     }
 }

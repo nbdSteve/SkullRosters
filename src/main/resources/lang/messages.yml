@@ -1,0 +1,23 @@
+player-removed:
+  - '&5&lRosters&d| &6{offline} &7has been removed from your faction, &6{player} &7has taken their place.'
+
+not-on-roster-joiner:
+  - '&5&lRosters&d| &7You are unable to join &6{faction} &7because you are not on their roster.'
+
+not-on-roster-faction:
+  - '&5&lRosters&d| &6{player} &7tried to join your faction but was not allowed because they are not on your roster.'
+
+roster-add:
+  - '&5&lRosters&d| &6{player} &7has been added to your factions roster, they may now join the faction.'
+
+roster-remove:
+  - '&5&lRosters&d| &6{player} &7has been removed from your roster.'
+
+roster-remove-player:
+  - "&5&lRosters&d| &7You have been removed from &e{faction}&7's roster by &6{player}&7."
+
+roster-full:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} &7can not be added to your roster because it is already at the maximum capacity of &6{size} &emembers&7.'
+
+not-on-roster-remove:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} &7can not be removed from your roster because they are not on it.'

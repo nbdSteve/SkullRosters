@@ -1,6 +1,6 @@
 package gg.steve.skullwars.rosters.managers;
 
-import gg.steve.elemental.gangs.utils.YamlFileUtil;
+import gg.steve.skullwars.rosters.utils.YamlFileUtil;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 

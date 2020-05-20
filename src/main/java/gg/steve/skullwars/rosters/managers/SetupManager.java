@@ -1,6 +1,9 @@
 package gg.steve.skullwars.rosters.managers;
 
 import gg.steve.skullwars.rosters.Rosters;
+import gg.steve.skullwars.rosters.listener.CommandListener;
+import gg.steve.skullwars.rosters.listener.FactionEventListener;
+import gg.steve.skullwars.rosters.listener.JoinListener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
@@ -36,5 +39,8 @@ public class SetupManager {
      */
     public static void registerEvents(Plugin instance) {
         PluginManager pm = instance.getServer().getPluginManager();
+        pm.registerEvents(new CommandListener(), instance);
+        pm.registerEvents(new FactionEventListener(), instance);
+        pm.registerEvents(new JoinListener(), instance);
     }
 }

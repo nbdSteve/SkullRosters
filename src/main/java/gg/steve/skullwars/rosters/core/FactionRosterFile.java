@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FactionRosterFile {
     //Store the file name string
@@ -34,10 +35,11 @@ public class FactionRosterFile {
 
     private void setupFactionFileDefaults(YamlConfiguration config) {
         //Set defaults for the information about the players tiers and currency
-        config.set("max-members", Files.CONFIG.get().getInt("starting-max-members"));
+        config.set("max-members", Files.CONFIG.get().getInt("roster-size"));
         config.set("remaining-invites", Files.CONFIG.get().getInt("invites-after-grace"));
-        config.set("created-after-grace", !Bukkit.getServer().isGracePeriod());
+        config.set("created-after-grace", false);
         config.set("has-reached-max-members", false);
+        config.set("players", new ArrayList<String>());
         //Send a nice message
         LogUtil.info("Successfully created a new faction roster file for faction with id: " + fileName + ", defaults have been set.");
     }

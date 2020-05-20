@@ -5,7 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 
 public enum Files {
-    CONFIG("gangs.yml"),
+    CONFIG("rosters.yml"),
     PERMISSIONS("permissions.yml"),
     DEBUG("lang" + File.separator + "debug.yml"),
     MESSAGES("lang" + File.separator + "messages.yml");

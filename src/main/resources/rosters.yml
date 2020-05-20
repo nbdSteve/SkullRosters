@@ -1,8 +1,8 @@
 #
 using-force-invites: true
 #
-roster-size: 10 # number of members allowed online at any time
+faction-size: 10 # max size of the faction
 #
-start-max-members: 15 # starting number of max members allowed
+roster-size: 15 # roster size
 #
 invites-after-grace: 3
