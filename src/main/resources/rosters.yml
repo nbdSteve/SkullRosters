@@ -1,0 +1,8 @@
+#
+using-force-invites: true
+#
+roster-size: 10 # number of members allowed online at any time
+#
+start-max-members: 15 # starting number of max members allowed
+#
+invites-after-grace: 3
