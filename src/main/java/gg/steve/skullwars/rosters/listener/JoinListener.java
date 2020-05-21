@@ -41,6 +41,7 @@ public class JoinListener implements Listener {
         }
         roster.getFaciton().addFPlayer(fPlayer);
         fPlayer.setFaction(roster.getFaciton(), false);
+        fPlayer.setRole(roster.getRole(fPlayer.getPlayer().getUniqueId()));
         MessageType.PLAYER_REMOVE.factionMessage(roster.getFaciton(), off.getName(), fPlayer.getName());
     }
 

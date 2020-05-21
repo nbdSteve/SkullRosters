@@ -53,7 +53,7 @@ public class CommandListener implements Listener {
                     MessageType.ROSTER_FULL.message(event.getPlayer(), player.getName());
                     return;
                 }
-                roster.addPlayer(player.getUniqueId());
+                roster.addPlayer(player.getUniqueId(), fPlayer.getRole());
                 MessageType.ROSTER_ADD.factionMessage(roster.getFaciton(), player.getName());
                 break;
             case "remove":

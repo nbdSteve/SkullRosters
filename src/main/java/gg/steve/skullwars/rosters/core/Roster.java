@@ -1,37 +1,53 @@
 package gg.steve.skullwars.rosters.core;
 
 import com.massivecraft.factions.Faction;
+import com.massivecraft.factions.struct.Role;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Roster {
     private Faction faciton;
     private int maxMembers, invitesRemaining;
     private FactionRosterFile data;
-    private List<String> players;
+    private Map<UUID, Role> players;
 
     public Roster(Faction faction) {
         this.faciton = faction;
         this.data = new FactionRosterFile(faction.getId());
         this.maxMembers = this.data.get().getInt("max-members");
         this.invitesRemaining = this.data.get().getInt("remaining-invites");
-        this.players = this.data.get().getStringList("players");
+        this.players = new HashMap<>();
+        for (String entry : this.data.get().getStringList("players")) {
+            String[] parts = entry.split(":");
+            players.put(UUID.fromString(parts[0]), Role.fromString(parts[1]));
+        }
     }
 
     public void saveToFile() {
         this.data.get().set("max-members", this.maxMembers);
         this.data.get().set("remaining-invites", this.invitesRemaining);
-        this.data.get().set("players", this.players);
+        List<String> playerList = new ArrayList<>();
+        for (UUID playerId : this.players.keySet()) {
+            playerList.add(playerId + ":" + this.players.get(playerId).name());
+        }
+        this.data.get().set("players", playerList);
         this.data.save();
     }
 
-    public void addPlayer(UUID playerId) {
-        this.players.add(String.valueOf(playerId));
+    public void addPlayer(UUID playerId, Role role) {
+        this.players.put(playerId, role);
     }
 
     public void removePlayer(UUID playerId) {
-        this.players.remove(String.valueOf(playerId));
+        this.players.remove(playerId);
+    }
+
+    public void updateRole(UUID playerId, Role newRole) {
+        this.players.put(playerId, newRole);
+    }
+
+    public Role getRole(UUID playerId) {
+        return this.players.get(playerId);
     }
 
     public void delete() {
@@ -60,7 +76,7 @@ public class Roster {
     }
 
     public boolean isOnRoster(UUID playerId) {
-        return this.players.contains(String.valueOf(playerId));
+        return this.players.containsKey(playerId);
     }
 
     public void decrementMaxMembers() {

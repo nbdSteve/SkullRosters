@@ -5,10 +5,12 @@ import com.massivecraft.factions.event.FPlayerJoinEvent;
 import com.massivecraft.factions.event.FPlayerLeaveEvent;
 import com.massivecraft.factions.event.FPlayerRoleChangeEvent;
 import com.massivecraft.factions.event.FactionDisbandEvent;
+import com.massivecraft.factions.struct.Role;
 import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.message.MessageType;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -23,7 +25,7 @@ public class FactionEventListener implements Listener {
     public void invite(FPlayerJoinEvent event) {
         if (event.getReason().equals(FPlayerJoinEvent.PlayerJoinReason.CREATE)) {
             FactionRosterManager.addRoster(event.getFaction());
-            FactionRosterManager.getRoster(event.getFaction()).addPlayer(event.getfPlayer().getPlayer().getUniqueId());
+            FactionRosterManager.getRoster(event.getFaction()).addPlayer(event.getfPlayer().getPlayer().getUniqueId(), event.getfPlayer().getRole());
             return;
         }
 //        if (Bukkit.getServer().isGracePeriod()) return;
@@ -34,10 +36,25 @@ public class FactionEventListener implements Listener {
             event.setCancelled(true);
             return;
         }
-        if (roster.getFaciton().getSize() >= Files.CONFIG.get().getInt("faction-size")) {
+        if (roster.getFaciton().getOnlinePlayers().size() >= Files.CONFIG.get().getInt("faction-size")) {
             MessageType.FACTION_MAX_ONLINE.message(event.getfPlayer().getPlayer(), event.getFaction().getTag());
             MessageType.FACTION_MAX_ONLINE_FACTION.factionMessage(event.getFaction(), event.getfPlayer().getName());
             event.setCancelled(true);
+        }
+        if (roster.getFaciton().getSize() >= Files.CONFIG.get().getInt("faction-size")) {
+            FPlayer off = null;
+            for (FPlayer offline : roster.getFaciton().getFPlayers()) {
+                if (offline.isOffline() && !offline.getRole().equals(Role.LEADER)) {
+                    off = offline;
+                    roster.getFaciton().removeFPlayer(offline);
+                    offline.resetFactionData();
+                    break;
+                }
+            }
+            roster.getFaciton().addFPlayer(event.getfPlayer());
+            event.getfPlayer().setFaction(roster.getFaciton(), false);
+            event.getfPlayer().setRole(roster.getRole(event.getfPlayer().getPlayer().getUniqueId()));
+            MessageType.PLAYER_REMOVE.factionMessage(roster.getFaciton(), off.getName(), event.getfPlayer().getName());
         }
     }
 
@@ -50,6 +67,7 @@ public class FactionEventListener implements Listener {
 
     @EventHandler
     public void role(FPlayerRoleChangeEvent event) {
-        event.getTo();
+        Roster roster = FactionRosterManager.getRoster(event.getFaction());
+        roster.updateRole(event.getfPlayer().getPlayer().getUniqueId(), event.getTo());
     }
 }
