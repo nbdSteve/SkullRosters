@@ -14,6 +14,9 @@ public enum CommandDebug {
     ALREADY_IN_FACTION("already-in-faction", "{player}", "{faction}"),
     ALREADY_ON_ROSTER("already-on-roster", "{player}"),
     ONLY_LEADER_CAN_EDIT("only-leader-can-edit"),
+    NO_ADDS_REMAINING("no-adds-remaining", "{player}"),
+    INCORRECT_ARGS("incorrect_args"),
+    INVALID_COMMAND("invalid-command"),
     // console debug
     ONLY_PLAYERS_ACCESSIBLE("only-player-accessible");
 

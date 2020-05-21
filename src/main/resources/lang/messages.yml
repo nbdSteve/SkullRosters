@@ -27,3 +27,9 @@ factions-max-online:
 
 faction-max-online-faction:
   - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} &7tried to join your faction but can not, you have already have the maximum amount of people online.'
+
+roster-kick:
+  - '&5&lRosters&d| &6{player} &7has been kicked from your roster, this action has reduced your roster size to &e{size} &7members.'
+
+roster-add-lose:
+  - '&5&lRosters&d| &7You have used up &e1 &7of your roster adds, you have &e{amount} &7remaining.'

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Roster {
     private Faction faciton;
-    private int maxMembers, invitesRemaining;
+    private int maxMembers, invitesRemaining, addsRemaining;
     private FactionRosterFile data;
     private Map<UUID, Role> players;
 
@@ -16,6 +16,7 @@ public class Roster {
         this.data = new FactionRosterFile(faction.getId());
         this.maxMembers = this.data.get().getInt("max-members");
         this.invitesRemaining = this.data.get().getInt("remaining-invites");
+        this.addsRemaining = this.data.get().getInt("adds-remaining");
         this.players = new HashMap<>();
         for (String entry : this.data.get().getStringList("players")) {
             String[] parts = entry.split(":");
@@ -26,6 +27,7 @@ public class Roster {
     public void saveToFile() {
         this.data.get().set("max-members", this.maxMembers);
         this.data.get().set("remaining-invites", this.invitesRemaining);
+        this.data.get().set("adds-remaining", this.addsRemaining);
         List<String> playerList = new ArrayList<>();
         for (UUID playerId : this.players.keySet()) {
             playerList.add(playerId + ":" + this.players.get(playerId).name());
@@ -58,12 +60,8 @@ public class Roster {
         return this.faciton.getSize() >= this.maxMembers;
     }
 
-    public boolean isCreatedAfterGrace() {
-        return this.data.get().getBoolean("created-after-grace");
-    }
-
-    public void setHitMaxMembers() {
-        this.data.get().set("has-reached-max-members", true);
+    public void setRosterAddsRemaining() {
+        this.data.get().set("adds-remaining", this.maxMembers - this.players.size());
         this.data.save();
     }
 
@@ -75,12 +73,20 @@ public class Roster {
         this.invitesRemaining--;
     }
 
-    public boolean isOnRoster(UUID playerId) {
-        return this.players.containsKey(playerId);
+    public void decrementAddsRemaining() {
+        this.addsRemaining--;
     }
 
     public void decrementMaxMembers() {
         this.maxMembers--;
+    }
+
+    public boolean hasAddsRemaining() {
+        return this.addsRemaining > 0;
+    }
+
+    public boolean isOnRoster(UUID playerId) {
+        return this.players.containsKey(playerId);
     }
 
     public Faction getFaciton() {
@@ -97,5 +103,9 @@ public class Roster {
 
     public FactionRosterFile getData() {
         return data;
+    }
+
+    public int getAddsRemaining() {
+        return addsRemaining;
     }
 }

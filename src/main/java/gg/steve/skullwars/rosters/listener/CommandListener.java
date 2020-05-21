@@ -2,6 +2,7 @@ package gg.steve.skullwars.rosters.listener;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
+import com.sun.xml.internal.ws.addressing.v200408.MemberSubmissionWsaClientTube;
 import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.message.CommandDebug;
@@ -21,7 +22,7 @@ public class CommandListener implements Listener {
         event.setCancelled(true);
         String[] args = event.getMessage().split(" ");
         if (args.length != 4) {
-            // incorrect args
+            CommandDebug.INCORRECT_ARGS.message(event.getPlayer());
             return;
         }
         Roster roster = FactionRosterManager.getRoster(FPlayers.getInstance().getByPlayer(event.getPlayer()).getFaction());
@@ -43,6 +44,10 @@ public class CommandListener implements Listener {
             CommandDebug.ONLY_LEADER_CAN_EDIT.message(event.getPlayer());
             return;
         }
+        if (!roster.hasAddsRemaining()) {
+            CommandDebug.NO_ADDS_REMAINING.message(event.getPlayer(), fPlayer.getName());
+            return;
+        }
         switch (args[2].toLowerCase()) {
             case "add":
                 if (roster.isOnRoster(player.getUniqueId())) {
@@ -53,9 +58,13 @@ public class CommandListener implements Listener {
                     MessageType.ROSTER_FULL.message(event.getPlayer(), player.getName());
                     return;
                 }
+                if (!Bukkit.isGracePeriod()) {
+                    roster.decrementAddsRemaining();
+                    MessageType.ROSTER_ADD_LOSE.factionMessage(roster.getFaciton(), String.valueOf(roster.getAddsRemaining()));
+                }
                 roster.addPlayer(player.getUniqueId(), fPlayer.getRole());
                 MessageType.ROSTER_ADD.factionMessage(roster.getFaciton(), player.getName());
-                break;
+                return;
             case "remove":
                 if (!roster.isOnRoster(player.getUniqueId())) {
                     MessageType.NOT_ON_ROSTER_REMOVE.message(event.getPlayer(), player.getName());
@@ -70,7 +79,17 @@ public class CommandListener implements Listener {
                     MessageType.ROSTER_REMOVE_PLAYER.message(fPlayer.getPlayer(), roster.getFaciton().getTag(), event.getPlayer().getName());
                 }
                 MessageType.ROSTER_REMOVE.factionMessage(roster.getFaciton(), player.getName());
-                break;
+                return;
+            default:
+                CommandDebug.INCORRECT_ARGS.message(event.getPlayer());
+        }
+    }
+
+    @EventHandler
+    public void grace(PlayerCommandPreprocessEvent event) {
+        if (!event.getMessage().equalsIgnoreCase("/grace off")) return;
+        for (Roster roster : FactionRosterManager.getRosters().values()) {
+            roster.setRosterAddsRemaining();
         }
     }
 }

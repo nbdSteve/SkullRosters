@@ -44,4 +44,8 @@ public class FactionRosterManager {
         rosters.get(faction).delete();
         rosters.remove(faction);
     }
+
+    public static Map<Faction, Roster> getRosters() {
+        return rosters;
+    }
 }

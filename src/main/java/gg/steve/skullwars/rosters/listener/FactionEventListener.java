@@ -10,7 +10,7 @@ import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.message.MessageType;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -25,10 +25,10 @@ public class FactionEventListener implements Listener {
     public void invite(FPlayerJoinEvent event) {
         if (event.getReason().equals(FPlayerJoinEvent.PlayerJoinReason.CREATE)) {
             FactionRosterManager.addRoster(event.getFaction());
-            FactionRosterManager.getRoster(event.getFaction()).addPlayer(event.getfPlayer().getPlayer().getUniqueId(), event.getfPlayer().getRole());
+            Roster roster = FactionRosterManager.getRoster(event.getFaction());
+            roster.addPlayer(event.getfPlayer().getPlayer().getUniqueId(), event.getfPlayer().getRole());
             return;
         }
-//        if (Bukkit.getServer().isGracePeriod()) return;
         Roster roster = FactionRosterManager.getRoster(event.getFaction());
         if (!roster.isOnRoster(event.getfPlayer().getPlayer().getUniqueId())) {
             MessageType.NOT_ON_ROSTER_JOINER.message(event.getfPlayer().getPlayer(), event.getFaction().getTag());
@@ -40,6 +40,7 @@ public class FactionEventListener implements Listener {
             MessageType.FACTION_MAX_ONLINE.message(event.getfPlayer().getPlayer(), event.getFaction().getTag());
             MessageType.FACTION_MAX_ONLINE_FACTION.factionMessage(event.getFaction(), event.getfPlayer().getName());
             event.setCancelled(true);
+            return;
         }
         if (roster.getFaciton().getSize() >= Files.CONFIG.get().getInt("faction-size")) {
             FPlayer off = null;
@@ -63,6 +64,12 @@ public class FactionEventListener implements Listener {
         Roster roster = FactionRosterManager.getRoster(event.getFaction());
         roster.removePlayer(event.getfPlayer().getPlayer().getUniqueId());
         MessageType.ROSTER_REMOVE.factionMessage(roster.getFaciton(), event.getfPlayer().getName());
+        if (event.getReason().equals(FPlayerLeaveEvent.PlayerLeaveReason.KICKED)) {
+            if (!Bukkit.getServer().isGracePeriod()) {
+                roster.decrementMaxMembers();
+                MessageType.ROSTER_KICK.factionMessage(event.getFaction(), event.getfPlayer().getName(), String.valueOf(roster.getMaxMembers()));
+            }
+        }
     }
 
     @EventHandler

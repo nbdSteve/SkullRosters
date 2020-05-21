@@ -1,6 +1,11 @@
 
+M
+java:S1659
+"+Declare "addsRemaining" on a separate line.(¹÷äÀûÿÿÿÿ8ìßŒÀ£.
+l
+java:S1192"ODefine a constant instead of duplicating this literal "adds-remaining" 3 times.(–¿¤8è„•À£.
 V
-java:S2864"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8â²˜¹£.
+java:S2864 "4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8â²˜¹£.
 P
 java:S1659
-".Declare "invitesRemaining" on a separate line.(ÿ ¢şÿÿÿÿ8ÑÜ’‚£.
+".Declare "invitesRemaining" on a separate line.(¹÷äÀûÿÿÿÿ8ÑÜ’‚£.

@@ -12,3 +12,12 @@ incorrect-number-of-args:
 
 only-leader-can-edit:
   - '&5&lRosters &4(&c&lERROR&4)&d| &7Only the leader can edit your factions roster.'
+
+no-adds-remaining:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} can not be added to your roster, you have run out of adds.'
+
+incorrect-args:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7The argument you entered is not a valid command.'
+
+invalid-command:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7The command you entered is invalid.'

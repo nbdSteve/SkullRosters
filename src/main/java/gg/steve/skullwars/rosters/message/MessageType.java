@@ -20,6 +20,8 @@ public enum MessageType {
     ROSTER_REMOVE_PLAYER("roster-remove-player", "{faction}", "{player}"),
     FACTION_MAX_ONLINE("faction-max-online", "{faction}"),
     FACTION_MAX_ONLINE_FACTION("faction-max-online-faction", "{player}"),
+    ROSTER_KICK("roster-kick", "{player}", "{size}"),
+    ROSTER_ADD_LOSE("roster-add-lose", "{amount}"),
     RELOAD("reload"),
     HELP("help");
 
