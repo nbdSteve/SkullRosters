@@ -29,3 +29,11 @@ i
 9src/main/java/gg/steve/skullwars/rosters/core/Roster.java,4\e\4eec8593c733237b87f901e28773c08a7a454491
 {
 Ksrc/main/java/gg/steve/skullwars/rosters/listener/FactionEventListener.java,b\a\ba6efae03ff8a075135dd92fa523c18eb51d091c
+r
+Bsrc/main/java/gg/steve/skullwars/rosters/managers/FileManager.java,4\6\468047acd965e85a69328d75cf33708882782e3f
+w
+Gsrc/main/java/gg/steve/skullwars/rosters/permission/PermissionNode.java,0\6\06fdc61eaae21f9528514ae7b1d351c9baf9b32e
+v
+Fsrc/main/java/gg/steve/skullwars/rosters/listener/CommandListener.java,f\f\ff8aeceb71dfda7dee38eb1f1aeeacf26c1f07a3
+s
+Csrc/main/java/gg/steve/skullwars/rosters/listener/JoinListener.java,2\0\20f999006c4b7db633daf0b98f97dd9973085959

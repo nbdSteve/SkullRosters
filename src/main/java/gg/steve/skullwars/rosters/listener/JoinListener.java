@@ -34,13 +34,11 @@ public class JoinListener implements Listener {
                 break;
             }
         }
-        LogUtil.info("running 1");
         if (off == null) {
             event.setJoinMessage("");
             event.getPlayer().kickPlayer("Your faction already has the maximum amount of members online.");
             return;
         }
-//        Bukkit.getPluginManager().callEvent(new FPlayerJoinEvent(fPlayer, roster.getFaciton(), FPlayerJoinEvent.PlayerJoinReason.COMMAND));
         roster.getFaciton().addFPlayer(fPlayer);
         fPlayer.setFaction(roster.getFaciton(), false);
         MessageType.PLAYER_REMOVE.factionMessage(roster.getFaciton(), off.getName(), fPlayer.getName());

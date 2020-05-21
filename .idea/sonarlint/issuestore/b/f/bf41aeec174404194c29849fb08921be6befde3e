@@ -1,6 +1,2 @@
 
-X
-java:S1854&"6Remove this useless assignment to local variable "pm".(“ÆİĞşÿÿÿÿ8Ã´ä£.
-I
-java:S1481&"'Remove this unused "pm" local variable.(“ÆİĞşÿÿÿÿ8Ã´ä£.
-X	java:S125"<This block of commented-out lines of code should be removed.(õïŒ²8ØÛä£.
+X	java:S125 "<This block of commented-out lines of code should be removed.(õïŒ²8ØÛä£.

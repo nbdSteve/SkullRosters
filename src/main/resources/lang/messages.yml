@@ -21,3 +21,9 @@ roster-full:
 
 not-on-roster-remove:
   - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} &7can not be removed from your roster because they are not on it.'
+
+factions-max-online:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7You can not join &e{faction} &7because they already have the maximum amount of players online.'
+
+faction-max-online-faction:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} &7tried to join your faction but can not, you have already have the maximum amount of people online.'

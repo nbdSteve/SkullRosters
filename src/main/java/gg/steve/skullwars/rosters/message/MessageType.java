@@ -18,6 +18,8 @@ public enum MessageType {
     NOT_ON_ROSTER_REMOVE("not-on-roster-remove", "{player}"),
     ROSTER_FULL("roster-full", "{player}", "{size}"),
     ROSTER_REMOVE_PLAYER("roster-remove-player", "{faction}", "{player}"),
+    FACTION_MAX_ONLINE("faction-max-online", "{faction}"),
+    FACTION_MAX_ONLINE_FACTION("faction-max-online-faction", "{player}"),
     RELOAD("reload"),
     HELP("help");
 
