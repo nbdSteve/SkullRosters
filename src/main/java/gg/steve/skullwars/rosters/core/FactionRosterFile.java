@@ -1,5 +1,9 @@
 package gg.steve.skullwars.rosters.core;
 
+import com.massivecraft.factions.FPlayers;
+import com.massivecraft.factions.Faction;
+import com.massivecraft.factions.Factions;
+import com.massivecraft.factions.FactionsPlugin;
 import gg.steve.skullwars.rosters.Rosters;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.utils.LogUtil;
@@ -28,15 +32,19 @@ public class FactionRosterFile {
         config = YamlConfiguration.loadConfiguration(file);
         //If the file doesn't exist then set the defaults
         if (!file.exists()) {
-            setupFactionFileDefaults(config);
+            setupFactionFileDefaults(config, factionId);
         }
         save();
     }
 
-    private void setupFactionFileDefaults(YamlConfiguration config) {
+    private void setupFactionFileDefaults(YamlConfiguration config, String factionId) {
         //Set defaults for the information about the players tiers and currency
         config.set("max-members", Files.CONFIG.get().getInt("roster-size"));
-        config.set("remaining-invites", Files.CONFIG.get().getInt("invites-after-grace"));
+        if (Bukkit.getServer().isGracePeriod()) {
+            config.set("remaining-invites", Files.CONFIG.get().getInt("invites-after-grace"));
+        } else {
+            config.set("remaining-invites", Files.CONFIG.get().getInt("faction-size") + Files.CONFIG.get().getInt("invites-after-grace"));
+        }
         config.set("adds-remaining", Files.CONFIG.get().getInt("roster-size"));
         config.set("players", new ArrayList<String>());
         //Send a nice message

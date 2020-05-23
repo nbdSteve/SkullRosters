@@ -6,3 +6,7 @@ prefix: Rosters
 depend: [Factions]
 authors: [stevegoodhill]
 description: SkullRosters plugin developed for SkullWars server.
+commands:
+  fra:
+    usage: /<command>
+    description: Admin command for SkullRosters, try /fra help.

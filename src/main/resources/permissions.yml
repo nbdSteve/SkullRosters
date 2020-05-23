@@ -1,0 +1,6 @@
+command:
+  reload: rosters.cmd.reload
+  help: rosters.cmd.help
+  add: rosters.cmd.add
+  member: rosters.cmd.member
+  invite: rosters.cmd.invite

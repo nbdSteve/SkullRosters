@@ -14,10 +14,31 @@ only-leader-can-edit:
   - '&5&lRosters &4(&c&lERROR&4)&d| &7Only the leader can edit your factions roster.'
 
 no-adds-remaining:
-  - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} can not be added to your roster, you have run out of adds.'
+  - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} &7can not be added to your roster, you have run out of adds.'
 
 incorrect-args:
   - '&5&lRosters &4(&c&lERROR&4)&d| &7The argument you entered is not a valid command.'
 
 invalid-command:
   - '&5&lRosters &4(&c&lERROR&4)&d| &7The command you entered is invalid.'
+
+rosters-not-enabled:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7This server is not using rosters at the moment, it is using force invites instead.'
+
+roster-does-not-exist:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7There is no roster available for that player or faction.'
+
+no-roster:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7That player or faction does not have a roster.'
+
+permission:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7You do not have the required permission (&e{node}&7) to use that.'
+
+faction-not-exist:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7The faction you entered does not exist.'
+
+roster-leave-not-on-roster:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7You are not on a faction roster.'
+
+roster-leave-in-faction:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &7You can not leave a roster while you are part of the faction, please type &e/f leave&7.'

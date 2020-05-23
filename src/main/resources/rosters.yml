@@ -1,8 +1,85 @@
 #
-using-force-invites: true
+using-force-invites: false # if set to false the plugin will use rosters
 #
 faction-size: 10 # max size of the faction
 #
 roster-size: 15 # roster size
 #
 invites-after-grace: 3
+#
+kick-message: '&c&lERROR! &7You faction, &e{faction}&7, already has the maximum amount of members online.'
+#
+gui:
+  name: "&5&l{faction}'s Roster"
+  type: none
+  size: 36
+  roster-item:
+    name: '&f&l{player}'
+    material: skull_item
+    data: 3
+    lore:
+      - ''
+      - '&c&lPLAYER STATS'
+      - ' &e- Role&f| &6&l{role}'
+      - ''
+      - '&c&lROSTER STATS'
+      - ' &e- Adds Remaining&f| &6&l{adds-remaining}'
+      - ' &e- Roster Size&f| &6&l{roster-size}'
+    enchantments:
+    item-flags:
+      - hide_attributes
+  filler-glass:
+    data: 7
+  1:
+    slot: 11
+    player: 0
+    roster-item: true
+  2:
+    slot: 12
+    player: 1
+    roster-item: true
+  3:
+    slot: 13
+    player: 2
+    roster-item: true
+  4:
+    slot: 14
+    player: 3
+    roster-item: true
+  5:
+    slot: 15
+    player: 4
+    roster-item: true
+  6:
+    slot: 20
+    player: 5
+    roster-item: true
+  7:
+    slot: 21
+    player: 6
+    roster-item: true
+  8:
+    slot: 22
+    player: 7
+    roster-item: true
+  9:
+    slot: 23
+    player: 8
+    roster-item: true
+  10:
+    slot: 24
+    player: 9
+    roster-item: true
+  11:
+    slot: 35
+    player: close
+    name: '&c&lClose'
+    material: hdb-187
+    data: 0
+    lore:
+      - '&7'
+      - '&7&o((left click to close this gui))'
+      - '&7'
+    enchantments:
+    item-flags:
+      - hide_attributes

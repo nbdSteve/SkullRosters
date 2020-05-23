@@ -37,3 +37,13 @@ v
 Fsrc/main/java/gg/steve/skullwars/rosters/listener/CommandListener.java,f\f\ff8aeceb71dfda7dee38eb1f1aeeacf26c1f07a3
 s
 Csrc/main/java/gg/steve/skullwars/rosters/listener/JoinListener.java,2\0\20f999006c4b7db633daf0b98f97dd9973085959
+k
+;src/main/java/gg/steve/skullwars/rosters/gui/RosterGui.java,d\f\dfbf7a9c379251bb334feebcdd45aa4c2eae7bec
+r
+Bsrc/main/java/gg/steve/skullwars/rosters/gui/GuiClickListener.java,5\0\50baa6a03e2dc87c9ba28d7d75824cfcdfd5325a
+m
+=src/main/java/gg/steve/skullwars/rosters/gui/AbstractGui.java,0\2\0253f25cff4bec7527eee5cb673349f4c8c12741
+o
+?src/main/java/gg/steve/skullwars/rosters/utils/GuiItemUtil.java,c\6\c6eb180fb60b92d5491d1f6e4f5ee957e2bd45c6
+h
+8src/main/java/gg/steve/skullwars/rosters/cmd/FraCmd.java,7\e\7ead921a76dfe892bb44e5075f81f0bac107cbd6

@@ -1,5 +1,7 @@
 
 c
-java:S2259:"AA "NullPointerException" could be thrown; "off" is nullable here.(›ÉíÇşÿÿÿÿ8ÖòÉ¹£.
+java:S2259<"AA "NullPointerException" could be thrown; "off" is nullable here.(›ÉíÇşÿÿÿÿ8€³ ı£.
 K
-java:S1066D"/Merge this if statement with the enclosing one.(¹Ö™8ÉÖê¿£.
+java:S1066P"/Merge this if statement with the enclosing one.(¹Ö™8ÉÖê¿£.
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¦û¦şÿÿÿÿ8€³ ı£.

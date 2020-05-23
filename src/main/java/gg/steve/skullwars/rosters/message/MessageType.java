@@ -22,6 +22,17 @@ public enum MessageType {
     FACTION_MAX_ONLINE_FACTION("faction-max-online-faction", "{player}"),
     ROSTER_KICK("roster-kick", "{player}", "{size}"),
     ROSTER_ADD_LOSE("roster-add-lose", "{amount}"),
+    INVITE_DECREMENT("invites-decremented", "{player}", "{amount}"),
+    OUT_OF_INVITES("out-of-invites", "{player}"),
+    ROSTER_LEAVE("roster-leave", "{player}"),
+    // admin cmd
+    ADD_ADMIN("add-admin", "{faction}"),
+    MEMBER_ADMIN("member-admin", "{faction}"),
+    INVITE_ADMIN("invite-admin", "{faction}"),
+    ADD_FACTION("add-faction", "{amount}"),
+    MEMBER_FACTION("member-faction", "{amount}"),
+    INVITE_FACTION("invite-faction", "{amount}"),
+    // misc
     RELOAD("reload"),
     HELP("help");
 

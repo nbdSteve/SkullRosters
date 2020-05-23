@@ -2,6 +2,9 @@ package gg.steve.skullwars.rosters.core;
 
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.struct.Role;
+import gg.steve.skullwars.rosters.gui.RosterGui;
+import gg.steve.skullwars.rosters.managers.Files;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -10,6 +13,7 @@ public class Roster {
     private int maxMembers, invitesRemaining, addsRemaining;
     private FactionRosterFile data;
     private Map<UUID, Role> players;
+    private RosterGui rosterGui;
 
     public Roster(Faction faction) {
         this.faciton = faction;
@@ -61,20 +65,42 @@ public class Roster {
     }
 
     public void setRosterAddsRemaining() {
+        this.addsRemaining = this.maxMembers - this.players.size();
         this.data.get().set("adds-remaining", this.maxMembers - this.players.size());
         this.data.save();
+    }
+
+    public void openGui(Player player) {
+        if (rosterGui == null) {
+            rosterGui = new RosterGui(Files.CONFIG.get().getConfigurationSection("gui"), this);
+        } else {
+            rosterGui.refresh();
+        }
+        rosterGui.open(player);
     }
 
     public int getSize() {
         return this.players.size();
     }
 
+    public void incrementInvitesRemaining() {
+        this.invitesRemaining++;
+    }
+
     public void decrementInvitesRemaining() {
         this.invitesRemaining--;
     }
 
+    public void incrementAddsRemaining() {
+        this.addsRemaining++;
+    }
+
     public void decrementAddsRemaining() {
         this.addsRemaining--;
+    }
+
+    public void incrementMaxMembers() {
+        this.maxMembers++;
     }
 
     public void decrementMaxMembers() {
@@ -107,5 +133,9 @@ public class Roster {
 
     public int getAddsRemaining() {
         return addsRemaining;
+    }
+
+    public Map<UUID, Role> getPlayers() {
+        return players;
     }
 }

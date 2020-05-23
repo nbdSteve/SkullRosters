@@ -3,6 +3,7 @@ package gg.steve.skullwars.rosters.core;
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
+import org.bukkit.OfflinePlayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +33,13 @@ public class FactionRosterManager {
     public static Roster getRosterForPlayer(FPlayer fPlayer) {
         for (Roster roster : rosters.values()) {
             if (roster.isOnRoster(fPlayer.getPlayer().getUniqueId())) return roster;
+        }
+        return null;
+    }
+    
+    public static Roster getRosterForPlayer(OfflinePlayer player) {
+        for (Roster roster : rosters.values()) {
+            if (roster.isOnRoster(player.getUniqueId())) return roster;
         }
         return null;
     }

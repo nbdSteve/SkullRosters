@@ -2,23 +2,31 @@ package gg.steve.skullwars.rosters.listener;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
-import com.massivecraft.factions.event.FPlayerJoinEvent;
 import com.massivecraft.factions.struct.Role;
+import gg.steve.skullwars.rosters.Rosters;
 import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.message.MessageType;
+import gg.steve.skullwars.rosters.utils.ColorUtil;
 import gg.steve.skullwars.rosters.utils.LogUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class JoinListener implements Listener {
+    private static List<UUID> kicked = new ArrayList<>();
 
     @EventHandler
     public void join(PlayerJoinEvent event) {
+        if (!Rosters.isRosters()) return;
         FPlayer fPlayer = FPlayers.getInstance().getByPlayer(event.getPlayer());
         if (fPlayer.hasFaction()) return;
         Roster roster;
@@ -36,7 +44,8 @@ public class JoinListener implements Listener {
         }
         if (off == null) {
             event.setJoinMessage("");
-            event.getPlayer().kickPlayer("Your faction already has the maximum amount of members online.");
+            kicked.add(event.getPlayer().getUniqueId());
+            event.getPlayer().kickPlayer(ColorUtil.colorize(Files.CONFIG.get().getString("kick-message").replace("{faction}", roster.getFaciton().getTag())));
             return;
         }
         roster.getFaciton().addFPlayer(fPlayer);
@@ -45,8 +54,11 @@ public class JoinListener implements Listener {
         MessageType.PLAYER_REMOVE.factionMessage(roster.getFaciton(), off.getName(), fPlayer.getName());
     }
 
-    @EventHandler
-    public void kick(PlayerKickEvent event) {
-        event.setLeaveMessage("");
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void kick(PlayerQuitEvent event) {
+        if (kicked.contains(event.getPlayer().getUniqueId())) {
+            event.setQuitMessage("");
+            kicked.remove(event.getPlayer().getUniqueId());
+        }
     }
 }

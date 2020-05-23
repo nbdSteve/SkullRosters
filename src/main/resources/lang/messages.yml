@@ -33,3 +33,36 @@ roster-kick:
 
 roster-add-lose:
   - '&5&lRosters&d| &7You have used up &e1 &7of your roster adds, you have &e{amount} &7remaining.'
+
+invites-decremented:
+  - '&5&lRosters&d| &6{player} &7has successfully joined your roster & faction, since the grace period has ended you have used a force invite - you have &e{amount} &7force invites remaining.'
+
+out-of-invites:
+  - '&5&lRosters &4(&c&lERROR&4)&d| &6{player} &7was not able to join your faction because you have run out of force invites.'
+
+help:
+  - '&5&lRosters&d| &7Write a detailed help message.'
+
+reload:
+  - '&5&lRosters&d| &7You have successfully reloaded the plugin.'
+
+add-admin:
+  - '&5&lRosters&d| &7You have successfully given &e{faction} &71 more roster add.'
+
+add-faction:
+  - '&5&lRosters&d| &7You have been given &e1 &7roster add, roster add(s) remaining &e{amount}&7.'
+
+member-admin:
+  - '&5&lRosters&d| &7You have successfully added a slot for 1 more player for &e{faction}&7.'
+
+member-faction:
+  - '&5&lRosters&d| &7Your max roster size has been increased by &e1 &7member, new roster size &e{amount}&7.'
+
+invite-admin:
+  - '&5&lRosters&d| &7You have successfully given &e{faction} &71 more force invite.'
+
+invite-faction:
+  - '&5&lRosters&d| &7You have been given &e1 &7force invite, force invite(s) remaining &e{amount}&7.'
+
+roster-leave:
+  - '&5&lRosters&d| &6{player} &7has left your roster.'

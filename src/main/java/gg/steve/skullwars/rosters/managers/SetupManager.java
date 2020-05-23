@@ -1,6 +1,8 @@
 package gg.steve.skullwars.rosters.managers;
 
 import gg.steve.skullwars.rosters.Rosters;
+import gg.steve.skullwars.rosters.cmd.FraCmd;
+import gg.steve.skullwars.rosters.gui.GuiClickListener;
 import gg.steve.skullwars.rosters.listener.CommandListener;
 import gg.steve.skullwars.rosters.listener.FactionEventListener;
 import gg.steve.skullwars.rosters.listener.JoinListener;
@@ -29,7 +31,7 @@ public class SetupManager {
     }
 
     public static void registerCommands(Rosters instance) {
-//        instance.getCommand("g").setExecutor(new GangCmd());
+        instance.getCommand("fra").setExecutor(new FraCmd());
     }
 
     /**
@@ -42,5 +44,6 @@ public class SetupManager {
         pm.registerEvents(new CommandListener(), instance);
         pm.registerEvents(new FactionEventListener(), instance);
         pm.registerEvents(new JoinListener(), instance);
+        pm.registerEvents(new GuiClickListener(), instance);
     }
 }

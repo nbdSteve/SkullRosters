@@ -4,6 +4,9 @@ import gg.steve.skullwars.rosters.managers.Files;
 import org.bukkit.command.CommandSender;
 
 public enum PermissionNode {
+    ADD("command.add"),
+    INVITE("command.invite"),
+    MEMBER("command.member"),
     RELOAD("command.reload"),
     HELP("command.help");
 

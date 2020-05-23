@@ -2,7 +2,9 @@ package gg.steve.skullwars.rosters.listener;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
-import com.sun.xml.internal.ws.addressing.v200408.MemberSubmissionWsaClientTube;
+import com.massivecraft.factions.Faction;
+import com.massivecraft.factions.Factions;
+import gg.steve.skullwars.rosters.Rosters;
 import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.message.CommandDebug;
@@ -20,12 +22,48 @@ public class CommandListener implements Listener {
         // /f roster add player
         if (!event.getMessage().startsWith("/f roster")) return;
         event.setCancelled(true);
+        if (!Rosters.isRosters()) {
+            CommandDebug.ROSTERS_NOT_ENABLED.message(event.getPlayer());
+            return;
+        }
         String[] args = event.getMessage().split(" ");
+        FPlayer sender = FPlayers.getInstance().getByPlayer(event.getPlayer());
+        if (sender.getFaction().isWilderness()) {
+            if (event.getMessage().equalsIgnoreCase("/f roster")) {
+                if (FactionRosterManager.getRosterForPlayer(sender) == null) {
+                    CommandDebug.NO_ROSTER.message(event.getPlayer());
+                    return;
+                } else {
+                    FactionRosterManager.getRosterForPlayer(sender).openGui(event.getPlayer());
+                    return;
+                }
+            } else if (args[2].equalsIgnoreCase("leave")) {
+                if (FactionRosterManager.getRosterForPlayer(sender) == null) {
+                    CommandDebug.ROSTER_LEAVE_NOT_ON_ROSTER.message(event.getPlayer());
+                    return;
+                } else {
+                    Roster roster = FactionRosterManager.getRosterForPlayer(sender);
+                    roster.removePlayer(sender.getPlayer().getUniqueId());
+                    MessageType.ROSTER_LEAVE.message(event.getPlayer(), event.getPlayer().getName());
+                    MessageType.ROSTER_LEAVE.factionMessage(roster.getFaciton(), sender.getName());
+                    return;
+                }
+            }
+        } else if (args.length == 3 && args[2].equalsIgnoreCase("leave")) {
+            Roster roster = FactionRosterManager.getRosterForPlayer(sender);
+            roster.removePlayer(sender.getPlayer().getUniqueId());
+            CommandDebug.ROSTER_LEAVE_IN_FACTION.message(event.getPlayer());
+            return;
+        }
+        Roster roster = FactionRosterManager.getRoster(FPlayers.getInstance().getByPlayer(event.getPlayer()).getFaction());
+        if (event.getMessage().equalsIgnoreCase("/f roster")) {
+            roster.openGui(event.getPlayer());
+            return;
+        }
         if (args.length != 4) {
             CommandDebug.INCORRECT_ARGS.message(event.getPlayer());
             return;
         }
-        Roster roster = FactionRosterManager.getRoster(FPlayers.getInstance().getByPlayer(event.getPlayer()).getFaction());
         OfflinePlayer player = Bukkit.getOfflinePlayer(args[3]);
         if (!player.isOnline() && !player.hasPlayedBefore()) {
             CommandDebug.NOT_PLAYED_BEFORE.message(event.getPlayer());
@@ -36,7 +74,7 @@ public class CommandListener implements Listener {
             CommandDebug.ALREADY_IN_FACTION.message(event.getPlayer(), player.getName(), fPlayer.getTag());
             return;
         }
-        if (FactionRosterManager.getRosterForPlayer(fPlayer) != null && !FactionRosterManager.getRosterForPlayer(fPlayer).getFaciton().equals(roster.getFaciton())) {
+        if (FactionRosterManager.getRosterForPlayer(player) != null && !FactionRosterManager.getRosterForPlayer(player).getFaciton().equals(roster.getFaciton())) {
             CommandDebug.ALREADY_ON_ROSTER.message(event.getPlayer(), player.getName());
             return;
         }
@@ -86,8 +124,58 @@ public class CommandListener implements Listener {
     }
 
     @EventHandler
+    public void showRoster(PlayerCommandPreprocessEvent event) {
+        // /f showroster faciton/player
+        if (!event.getMessage().contains("/f showroster")) return;
+        event.setCancelled(true);
+        if (!Rosters.isRosters()) {
+            CommandDebug.ROSTERS_NOT_ENABLED.message(event.getPlayer());
+            return;
+        }
+        if (event.getMessage().equalsIgnoreCase("/f showroster")) {
+            Roster roster = FactionRosterManager.getRoster(FPlayers.getInstance().getByPlayer(event.getPlayer()).getFaction());
+            roster.openGui(event.getPlayer());
+            return;
+        }
+        String[] args = event.getMessage().split(" ");
+        if (args.length != 3) {
+            CommandDebug.INCORRECT_ARGS.message(event.getPlayer());
+            return;
+        }
+        if (args[2].equalsIgnoreCase("wilderness") || args[2].equalsIgnoreCase("warzone") || args[2].equalsIgnoreCase("safezone")) {
+            CommandDebug.NO_ROSTER.message(event.getPlayer());
+            return;
+        }
+        Faction faction = null;
+        OfflinePlayer player;
+        try {
+            faction = Factions.getInstance().getByTag(args[2]);
+        } catch (Exception e) {
+
+        }
+        if (faction == null) {
+            player = Bukkit.getOfflinePlayer(args[2]);
+            if (!player.hasPlayedBefore()) {
+                CommandDebug.ROSTER_DOES_NOT_EXIST.message(event.getPlayer());
+                return;
+            }
+        } else {
+            Roster roster = FactionRosterManager.getRoster(faction);
+            roster.openGui(event.getPlayer());
+            return;
+        }
+        Roster roster = FactionRosterManager.getRosterForPlayer(player);
+        if (roster == null) {
+            CommandDebug.NO_ROSTER.message(event.getPlayer());
+            return;
+        }
+        roster.openGui(event.getPlayer());
+    }
+    
+    @EventHandler
     public void grace(PlayerCommandPreprocessEvent event) {
         if (!event.getMessage().equalsIgnoreCase("/grace off")) return;
+        if (!Rosters.isRosters()) return;
         for (Roster roster : FactionRosterManager.getRosters().values()) {
             roster.setRosterAddsRemaining();
         }

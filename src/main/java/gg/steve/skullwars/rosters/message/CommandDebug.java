@@ -17,6 +17,13 @@ public enum CommandDebug {
     NO_ADDS_REMAINING("no-adds-remaining", "{player}"),
     INCORRECT_ARGS("incorrect_args"),
     INVALID_COMMAND("invalid-command"),
+    ROSTERS_NOT_ENABLED("rosters-not-enabled"),
+    ROSTER_DOES_NOT_EXIST("roster-does-not-exist"),
+    NO_ROSTER("no-roster"),
+    FACTION_NOT_EXIST("faction-not-exist"),
+    PERMISSION("permission", "{node}"),
+    ROSTER_LEAVE_NOT_ON_ROSTER("roster-leave-not-on-roster"),
+    ROSTER_LEAVE_IN_FACTION("roster-leave-in-faction"),
     // console debug
     ONLY_PLAYERS_ACCESSIBLE("only-player-accessible");
 
