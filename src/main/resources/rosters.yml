@@ -9,6 +9,12 @@ invites-after-grace: 3
 #
 kick-message: '&c&lERROR! &7You faction, &e{faction}&7, already has the maximum amount of members online.'
 #
+filler-glass-name: ' '
+#
+leave-kick-affect-roster-size: false
+#
+roster-full-kick: false
+#
 gui:
   name: "&5&l{faction}'s Roster"
   type: none

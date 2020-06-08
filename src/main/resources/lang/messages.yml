@@ -66,3 +66,9 @@ invite-faction:
 
 roster-leave:
   - '&5&lRosters&d| &6{player} &7has left your roster.'
+
+faction-full-join:
+  - '&5&lRosters&d| &7Your faction is currently full, try joining it with &e/f join&7, if there is a free spot you will be rotated in.'
+
+faction-full:
+  - '&5&lRosters&d| &7You can not join your faction yet because the maximum amount of members are on.'

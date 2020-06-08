@@ -1,6 +1,8 @@
 package gg.steve.skullwars.rosters.gui;
 
 import gg.steve.skullwars.rosters.core.Roster;
+import gg.steve.skullwars.rosters.managers.Files;
+import gg.steve.skullwars.rosters.utils.ColorUtil;
 import gg.steve.skullwars.rosters.utils.GuiItemUtil;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -48,7 +50,7 @@ public class RosterGui extends AbstractGui {
     public ItemStack getFillerGlass(byte data) {
         ItemStack item = new ItemStack(Material.valueOf("STAINED_GLASS_PANE"), 1, data);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(" ");
+        meta.setDisplayName(ColorUtil.colorize(Files.CONFIG.get().getString("filler-glass-name")));
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(meta);
         return item;

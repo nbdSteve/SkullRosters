@@ -7,8 +7,8 @@ import gg.steve.skullwars.rosters.managers.SetupManager;
 import gg.steve.skullwars.rosters.utils.LogUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Rosters extends JavaPlugin {
-    private static Rosters instance;
+public final class SkullRosters extends JavaPlugin {
+    private static SkullRosters instance;
     private static boolean roster;
 
     @Override
@@ -20,7 +20,7 @@ public final class Rosters extends JavaPlugin {
         SetupManager.registerEvents(instance);
         FactionRosterManager.initialise();
         roster = !Files.CONFIG.get().getBoolean("using-force-invites");
-        LogUtil.info("Rosters has successfully loaded, please contact nbdSteve#0583 on discord if you have any issues.");
+        LogUtil.info("SkullRosters has successfully loaded, please contact nbdSteve#0583 on discord if you have any issues.");
     }
 
     @Override
@@ -29,7 +29,7 @@ public final class Rosters extends JavaPlugin {
         FactionRosterManager.saveRosters();
     }
 
-    public static Rosters get() {
+    public static SkullRosters get() {
         return instance;
     }
 

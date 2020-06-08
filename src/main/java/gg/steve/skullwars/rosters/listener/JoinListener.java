@@ -3,18 +3,16 @@ package gg.steve.skullwars.rosters.listener;
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.struct.Role;
-import gg.steve.skullwars.rosters.Rosters;
+import gg.steve.skullwars.rosters.SkullRosters;
 import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.message.MessageType;
 import gg.steve.skullwars.rosters.utils.ColorUtil;
-import gg.steve.skullwars.rosters.utils.LogUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
@@ -26,13 +24,24 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void join(PlayerJoinEvent event) {
-        if (!Rosters.isRosters()) return;
+        if (!SkullRosters.isRosters()) return;
         FPlayer fPlayer = FPlayers.getInstance().getByPlayer(event.getPlayer());
         if (fPlayer.hasFaction()) return;
         Roster roster;
         if ((roster = FactionRosterManager.getRosterForPlayer(fPlayer)) == null) return;
-        LogUtil.info(roster.getFaciton().getSize() + "");
-        if (roster.getFaciton().getSize() < Files.CONFIG.get().getInt("faction-size")) return;
+        int add = 0;
+        if (!roster.getFaciton().getFPlayerLeader().isOnline()) add++;
+        if (roster.getFaciton().getSize() + add < Files.CONFIG.get().getInt("faction-size")) return;
+        if (roster.getFaciton().getOnlinePlayers().size() + add >= Files.CONFIG.get().getInt("faction-size")) {
+            if (Files.CONFIG.get().getBoolean("roster-full-kick")) {
+                event.setJoinMessage("");
+                kicked.add(event.getPlayer().getUniqueId());
+                event.getPlayer().kickPlayer(ColorUtil.colorize(Files.CONFIG.get().getString("kick-message").replace("{faction}", roster.getFaciton().getTag())));
+            } else {
+                MessageType.FACTION_FULL_JOIN.message(event.getPlayer());
+            }
+            return;
+        }
         FPlayer off = null;
         for (FPlayer offline : roster.getFaciton().getFPlayers()) {
             if (offline.isOffline() && !offline.getRole().equals(Role.LEADER)) {
@@ -42,10 +51,14 @@ public class JoinListener implements Listener {
                 break;
             }
         }
-        if (off == null) {
-            event.setJoinMessage("");
-            kicked.add(event.getPlayer().getUniqueId());
-            event.getPlayer().kickPlayer(ColorUtil.colorize(Files.CONFIG.get().getString("kick-message").replace("{faction}", roster.getFaciton().getTag())));
+        if (off == null || roster.getFaciton().getSize() + add >= Files.CONFIG.get().getInt("faction-size")) {
+            if (Files.CONFIG.get().getBoolean("roster-full-kick")) {
+                event.setJoinMessage("");
+                kicked.add(event.getPlayer().getUniqueId());
+                event.getPlayer().kickPlayer(ColorUtil.colorize(Files.CONFIG.get().getString("kick-message").replace("{faction}", roster.getFaciton().getTag())));
+            } else {
+                MessageType.FACTION_FULL_JOIN.message(event.getPlayer());
+            }
             return;
         }
         roster.getFaciton().addFPlayer(fPlayer);

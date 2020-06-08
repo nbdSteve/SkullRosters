@@ -1,8 +1,8 @@
-name: Rosters
+name: SkullRosters
 version: ${project.version}
-main: gg.steve.skullwars.rosters.Rosters
+main: gg.steve.skullwars.rosters.SkullRosters
 api-version: 1.13
-prefix: Rosters
+prefix: SkullRosters
 depend: [Factions]
 authors: [stevegoodhill]
 description: SkullRosters plugin developed for SkullWars server.

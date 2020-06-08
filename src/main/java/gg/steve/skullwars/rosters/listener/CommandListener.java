@@ -4,11 +4,14 @@ import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
-import gg.steve.skullwars.rosters.Rosters;
+import com.massivecraft.factions.struct.Role;
+import gg.steve.skullwars.rosters.SkullRosters;
 import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
+import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.message.CommandDebug;
 import gg.steve.skullwars.rosters.message.MessageType;
+import gg.steve.skullwars.rosters.utils.LogUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
@@ -22,7 +25,7 @@ public class CommandListener implements Listener {
         // /f roster add player
         if (!event.getMessage().startsWith("/f roster")) return;
         event.setCancelled(true);
-        if (!Rosters.isRosters()) {
+        if (!SkullRosters.isRosters()) {
             CommandDebug.ROSTERS_NOT_ENABLED.message(event.getPlayer());
             return;
         }
@@ -128,7 +131,7 @@ public class CommandListener implements Listener {
         // /f showroster faciton/player
         if (!event.getMessage().contains("/f showroster")) return;
         event.setCancelled(true);
-        if (!Rosters.isRosters()) {
+        if (!SkullRosters.isRosters()) {
             CommandDebug.ROSTERS_NOT_ENABLED.message(event.getPlayer());
             return;
         }
@@ -171,13 +174,48 @@ public class CommandListener implements Listener {
         }
         roster.openGui(event.getPlayer());
     }
-    
+
     @EventHandler
     public void grace(PlayerCommandPreprocessEvent event) {
         if (!event.getMessage().equalsIgnoreCase("/grace off")) return;
-        if (!Rosters.isRosters()) return;
+        if (!SkullRosters.isRosters()) return;
         for (Roster roster : FactionRosterManager.getRosters().values()) {
             roster.setRosterAddsRemaining();
         }
+    }
+
+    @EventHandler
+    public void join(PlayerCommandPreprocessEvent event) {
+        if (!event.getMessage().contains("/f join")) return;
+        if (!SkullRosters.isRosters()) return;
+        if (Files.CONFIG.get().getBoolean("roster-full-kick")) return;
+        FPlayer fPlayer = FPlayers.getInstance().getByPlayer(event.getPlayer());
+        if (fPlayer.hasFaction()) return;
+        Roster roster;
+        if ((roster = FactionRosterManager.getRosterForPlayer(fPlayer)) == null) return;
+        if (roster.getFaciton().getSize() < Files.CONFIG.get().getInt("faction-size")) {
+            roster.getFaciton().addFPlayer(fPlayer);
+            fPlayer.setFaction(roster.getFaciton(), false);
+            fPlayer.setRole(roster.getRole(fPlayer.getPlayer().getUniqueId()));
+            return;
+        }
+        FPlayer off = null;
+        for (FPlayer offline : roster.getFaciton().getFPlayers()) {
+            if (offline.isOffline() && !offline.getRole().equals(Role.LEADER)) {
+                off = offline;
+                roster.getFaciton().removeFPlayer(offline);
+                offline.resetFactionData();
+                break;
+            }
+        }
+        if (off == null) {
+            MessageType.FACTION_FULL.message(event.getPlayer());
+            return;
+        }
+        LogUtil.info(roster.getRole(fPlayer.getPlayer().getUniqueId()).name());
+        roster.getFaciton().addFPlayer(fPlayer);
+        fPlayer.setFaction(roster.getFaciton(), false);
+        fPlayer.setRole(roster.getRole(fPlayer.getPlayer().getUniqueId()));
+        MessageType.PLAYER_REMOVE.factionMessage(roster.getFaciton(), off.getName(), fPlayer.getName());
     }
 }

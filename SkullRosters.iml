@@ -21,9 +21,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.github.SaberLLC:Saber-Factions:2.3.3-STABLE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.SaberLLC:Saber-Factions:2.3.3-STABLE" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: gg.steve:catalyst:unknown">
+      <library name="Maven: gg.steve:catalyst:0.1.2">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/main/lib/api-1.8.8-R0.2-SNAPSHOT.jar!/" />
         </CLASSES>

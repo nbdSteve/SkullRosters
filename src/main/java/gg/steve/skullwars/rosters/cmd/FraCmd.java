@@ -2,7 +2,7 @@ package gg.steve.skullwars.rosters.cmd;
 
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
-import gg.steve.skullwars.rosters.Rosters;
+import gg.steve.skullwars.rosters.SkullRosters;
 import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.message.CommandDebug;
@@ -36,8 +36,8 @@ public class FraCmd implements CommandExecutor {
                 CommandDebug.PERMISSION.message(player, PermissionNode.RELOAD.get());
                 return true;
             }
-            Bukkit.getPluginManager().disablePlugin(Rosters.get());
-            Bukkit.getPluginManager().enablePlugin(Rosters.get());
+            Bukkit.getPluginManager().disablePlugin(SkullRosters.get());
+            Bukkit.getPluginManager().enablePlugin(SkullRosters.get());
             MessageType.RELOAD.message(player);
         }
         if (args.length != 2) {

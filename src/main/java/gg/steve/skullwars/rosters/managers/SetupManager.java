@@ -1,6 +1,6 @@
 package gg.steve.skullwars.rosters.managers;
 
-import gg.steve.skullwars.rosters.Rosters;
+import gg.steve.skullwars.rosters.SkullRosters;
 import gg.steve.skullwars.rosters.cmd.FraCmd;
 import gg.steve.skullwars.rosters.gui.GuiClickListener;
 import gg.steve.skullwars.rosters.listener.CommandListener;
@@ -30,7 +30,7 @@ public class SetupManager {
         }
     }
 
-    public static void registerCommands(Rosters instance) {
+    public static void registerCommands(SkullRosters instance) {
         instance.getCommand("fra").setExecutor(new FraCmd());
     }
 

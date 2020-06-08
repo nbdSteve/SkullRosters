@@ -1,10 +1,6 @@
 package gg.steve.skullwars.rosters.core;
 
-import com.massivecraft.factions.FPlayers;
-import com.massivecraft.factions.Faction;
-import com.massivecraft.factions.Factions;
-import com.massivecraft.factions.FactionsPlugin;
-import gg.steve.skullwars.rosters.Rosters;
+import gg.steve.skullwars.rosters.SkullRosters;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.utils.LogUtil;
 import org.bukkit.Bukkit;
@@ -27,7 +23,7 @@ public class FactionRosterFile {
         //Set instance variable
         this.fileName = factionId;
         //Get the player file
-        file = new File(Rosters.get().getDataFolder(), "roster-data" + File.separator + fileName + ".yml");
+        file = new File(SkullRosters.get().getDataFolder(), "roster-data" + File.separator + fileName + ".yml");
         //Load the configuration for the file
         config = YamlConfiguration.loadConfiguration(file);
         //If the file doesn't exist then set the defaults
@@ -45,7 +41,7 @@ public class FactionRosterFile {
         } else {
             config.set("remaining-invites", Files.CONFIG.get().getInt("faction-size") + Files.CONFIG.get().getInt("invites-after-grace"));
         }
-        config.set("adds-remaining", Files.CONFIG.get().getInt("roster-size"));
+        config.set("adds-remaining", Files.CONFIG.get().getInt("roster-size") - 1);
         config.set("players", new ArrayList<String>());
         //Send a nice message
         LogUtil.info("Successfully created a new faction roster file for faction with id: " + fileName + ", defaults have been set.");

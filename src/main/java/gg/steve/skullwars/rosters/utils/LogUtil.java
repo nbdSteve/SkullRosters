@@ -1,14 +1,14 @@
 package gg.steve.skullwars.rosters.utils;
 
-import gg.steve.skullwars.rosters.Rosters;
+import gg.steve.skullwars.rosters.SkullRosters;
 
 public class LogUtil {
 
     public static void info(String message) {
-        Rosters.get().getLogger().info(message);
+        SkullRosters.get().getLogger().info(message);
     }
 
     public static void warning(String message) {
-        Rosters.get().getLogger().warning(message);
+        SkullRosters.get().getLogger().warning(message);
     }
 }

@@ -1,7 +1,12 @@
 
-c
-java:S2259<"AA "NullPointerException" could be thrown; "off" is nullable here.(›ÉíÇşÿÿÿÿ8€³ ı£.
-K
-java:S1066P"/Merge this if statement with the enclosing one.(¹Ö™8ÉÖê¿£.
+]	java:S125V"<This block of commented-out lines of code should be removed.(Ÿè‰ûÿÿÿÿ8¬ı¨©.
+g
+java:S1128"ERemove this unused import 'gg.steve.skullwars.rosters.utils.LogUtil'.(£Ú‘üÿÿÿÿ8ÇÈ¡©©.
 t
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¦û¦şÿÿÿÿ8€³ ı£.
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¦û¦şÿÿÿÿ8€³ ı£.
+c
+java:S2259@"AA "NullPointerException" could be thrown; "off" is nullable here.(›ÉíÇşÿÿÿÿ8€³ ı£.
+K
+java:S1066Y"/Merge this if statement with the enclosing one.(¹Ö™8Ôµ€„§.
+]	java:S125<"<This block of commented-out lines of code should be removed.(şªüŸúÿÿÿÿ8Ğ‡©©.
+]	java:S125B"<This block of commented-out lines of code should be removed.(şªüŸúÿÿÿÿ8ğí©©.

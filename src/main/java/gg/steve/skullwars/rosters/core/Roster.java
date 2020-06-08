@@ -138,4 +138,24 @@ public class Roster {
     public Map<UUID, Role> getPlayers() {
         return players;
     }
+
+    public List<UUID> getPlayersInRoleOrder() {
+        List<UUID> players = new ArrayList<>();
+        for (UUID playerId : this.players.keySet()) {
+            if (this.players.get(playerId).equals(Role.LEADER)) players.add(playerId);
+        }
+        for (UUID playerId : this.players.keySet()) {
+            if (this.players.get(playerId).equals(Role.COLEADER)) players.add(playerId);
+        }
+        for (UUID playerId : this.players.keySet()) {
+            if (this.players.get(playerId).equals(Role.MODERATOR)) players.add(playerId);
+        }
+        for (UUID playerId : this.players.keySet()) {
+            if (this.players.get(playerId).equals(Role.RECRUIT)) players.add(playerId);
+        }
+        for (UUID playerId : this.players.keySet()) {
+            if (this.players.get(playerId).equals(Role.NORMAL)) players.add(playerId);
+        }
+        return players;
+    }
 }

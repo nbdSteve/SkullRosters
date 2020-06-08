@@ -1,7 +1,5 @@
 package gg.steve.skullwars.rosters.utils;
 
-import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.FPlayers;
 import gg.steve.skullwars.rosters.core.Roster;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import org.bukkit.Bukkit;
@@ -11,7 +9,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,7 +34,7 @@ public class GuiItemUtil {
     }
 
     public static ItemStack createRosterItem(ConfigurationSection section, String entry, Roster roster) {
-        List<UUID> players = new ArrayList<>(roster.getPlayers().keySet());
+        List<UUID> players = roster.getPlayersInRoleOrder();
         OfflinePlayer player;
         try {
             player = Bukkit.getOfflinePlayer(players.get(section.getInt(entry + ".player")));

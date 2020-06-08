@@ -25,6 +25,8 @@ public enum MessageType {
     INVITE_DECREMENT("invites-decremented", "{player}", "{amount}"),
     OUT_OF_INVITES("out-of-invites", "{player}"),
     ROSTER_LEAVE("roster-leave", "{player}"),
+    FACTION_FULL_JOIN("faction-full-join"),
+    FACTION_FULL("faction-full"),
     // admin cmd
     ADD_ADMIN("add-admin", "{faction}"),
     MEMBER_ADMIN("member-admin", "{faction}"),
