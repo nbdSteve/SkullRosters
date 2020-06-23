@@ -1,21 +1,21 @@
 
 W
-java:S2864“"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8£§º„§.
-P
-java:S1659".Declare "invitesRemaining" on a separate line.(¹÷äÀûÿÿÿÿ8ÑÜ’‚£.
+java:S2864–"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8£§º„§.
+W
+java:S2864™"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8£§º„§.
+V
+java:S2864$"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8â²˜¹£.
 M
 java:S1659"+Declare "addsRemaining" on a separate line.(¹÷äÀûÿÿÿÿ8ìßŒÀ£.
 W
-java:S2864œ"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8Ç¢»„§.
+java:S2864“"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8£§º„§.
 l
 java:S1192"ODefine a constant instead of duplicating this literal "adds-remaining" 3 times.(–¿¤8è„•À£.
 X
 java:S1117";Rename "players" which hides the field declared at line 15.(Ôó¼<8é°¢„§.
 W
+java:S2864œ"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8Ç¢»„§.
+P
+java:S1659".Declare "invitesRemaining" on a separate line.(¹÷äÀûÿÿÿÿ8ÑÜ’‚£.
+W
 java:S2864"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8”ø¹„§.
-V
-java:S2864$"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8â²˜¹£.
-W
-java:S2864–"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8£§º„§.
-W
-java:S2864™"4Iterate over the "entrySet" instead of the "keySet".(ıÊë¦ıÿÿÿÿ8£§º„§.

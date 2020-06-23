@@ -186,7 +186,7 @@ public class CommandListener implements Listener {
 
     @EventHandler
     public void join(PlayerCommandPreprocessEvent event) {
-        if (!event.getMessage().contains("/f join")) return;
+        if (!event.getMessage().contains("/f join ")) return;
         if (!SkullRosters.isRosters()) return;
         if (Files.CONFIG.get().getBoolean("roster-full-kick")) return;
         FPlayer fPlayer = FPlayers.getInstance().getByPlayer(event.getPlayer());
@@ -194,9 +194,11 @@ public class CommandListener implements Listener {
         Roster roster;
         if ((roster = FactionRosterManager.getRosterForPlayer(fPlayer)) == null) return;
         if (roster.getFaciton().getSize() < Files.CONFIG.get().getInt("faction-size")) {
+            event.setCancelled(true);
             roster.getFaciton().addFPlayer(fPlayer);
-            fPlayer.setFaction(roster.getFaciton(), false);
             fPlayer.setRole(roster.getRole(fPlayer.getPlayer().getUniqueId()));
+            fPlayer.setFaction(roster.getFaciton(), false);
+            MessageType.PLAYER_JOIN.factionMessage(fPlayer.getFaction(), fPlayer.getRolePrefix(), fPlayer.getName());
             return;
         }
         FPlayer off = null;
@@ -212,7 +214,6 @@ public class CommandListener implements Listener {
             MessageType.FACTION_FULL.message(event.getPlayer());
             return;
         }
-        LogUtil.info(roster.getRole(fPlayer.getPlayer().getUniqueId()).name());
         roster.getFaciton().addFPlayer(fPlayer);
         fPlayer.setFaction(roster.getFaciton(), false);
         fPlayer.setRole(roster.getRole(fPlayer.getPlayer().getUniqueId()));

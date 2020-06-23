@@ -27,6 +27,7 @@ public enum MessageType {
     ROSTER_LEAVE("roster-leave", "{player}"),
     FACTION_FULL_JOIN("faction-full-join"),
     FACTION_FULL("faction-full"),
+    PLAYER_JOIN("player-join", "{role-prefix}", "{player}"),
     // admin cmd
     ADD_ADMIN("add-admin", "{faction}"),
     MEMBER_ADMIN("member-admin", "{faction}"),

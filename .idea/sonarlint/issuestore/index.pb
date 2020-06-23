@@ -21,8 +21,6 @@ s
 Csrc/main/java/gg/steve/skullwars/rosters/managers/SetupManager.java,b\f\bf41aeec174404194c29849fb08921be6befde3e
 t
 Dsrc/main/java/gg/steve/skullwars/rosters/core/FactionRosterFile.java,9\6\960f412ede1a43c95f9b6c2b0bb8272000a3488a
-e
-5src/main/java/gg/steve/skullwars/rosters/Rosters.java,0\4\04eac3d0f77b25ef7970bb036b11d5791639e357
 w
 Gsrc/main/java/gg/steve/skullwars/rosters/core/FactionRosterManager.java,4\5\451a13d5d354d8a0b0016d8c680897bb27686bbc
 i

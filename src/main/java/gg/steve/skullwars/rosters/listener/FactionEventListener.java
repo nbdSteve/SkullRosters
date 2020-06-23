@@ -11,7 +11,6 @@ import gg.steve.skullwars.rosters.core.FactionRosterManager;
 import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.message.MessageType;
-import gg.steve.skullwars.rosters.utils.LogUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -57,16 +56,15 @@ public class FactionEventListener implements Listener {
                     break;
                 }
             }
-//            event.getfPlayer().resetFactionData();
             roster.getFaciton().addFPlayer(event.getfPlayer());
             event.getfPlayer().setFaction(roster.getFaciton(), false);
             event.getfPlayer().setRole(roster.getRole(event.getfPlayer().getPlayer().getUniqueId()));
             MessageType.PLAYER_REMOVE.factionMessage(roster.getFaciton(), off.getName(), event.getfPlayer().getName());
         } else {
-//            event.getfPlayer().resetFactionData();
             roster.getFaciton().addFPlayer(event.getfPlayer());
             event.getfPlayer().setFaction(roster.getFaciton(), false);
             event.getfPlayer().setRole(roster.getRole(event.getfPlayer().getPlayer().getUniqueId()));
+            MessageType.PLAYER_JOIN.factionMessage(event.getfPlayer().getFaction(), event.getfPlayer().getRolePrefix(), event.getfPlayer().getName());
         }
         // force invites code
         if (!SkullRosters.isRosters() && !Bukkit.getServer().isGracePeriod() && roster.getInvitesRemaining() > 0) {
@@ -80,11 +78,12 @@ public class FactionEventListener implements Listener {
 
     @EventHandler
     public void leave(FPlayerLeaveEvent event) {
-        if (!SkullRosters.isRosters() || !Files.CONFIG.get().getBoolean("leave-kick-affect-roster-size")) return;
+        if (!SkullRosters.isRosters() || !Files.CONFIG.get().getBoolean("leave-kick-affect-roster-size"))
+            return;
         if (event.getReason().equals(FPlayerLeaveEvent.PlayerLeaveReason.DISBAND)) return;
         Roster roster = FactionRosterManager.getRoster(event.getFaction());
-//        roster.removePlayer(event.getfPlayer().getPlayer().getUniqueId());
-//        MessageType.ROSTER_REMOVE.factionMessage(roster.getFaciton(), event.getfPlayer().getName());
+        roster.removePlayer(event.getfPlayer().getPlayer().getUniqueId());
+        MessageType.ROSTER_REMOVE.factionMessage(roster.getFaciton(), event.getfPlayer().getName());
         if (event.getReason().equals(FPlayerLeaveEvent.PlayerLeaveReason.KICKED)) {
             if (!Bukkit.getServer().isGracePeriod()) {
                 roster.decrementMaxMembers();
@@ -97,6 +96,6 @@ public class FactionEventListener implements Listener {
     public void role(FPlayerRoleChangeEvent event) {
         if (!SkullRosters.isRosters()) return;
         Roster roster = FactionRosterManager.getRoster(event.getFaction());
-        roster.updateRole(event.getfPlayer().getPlayer().getUniqueId(), event.getTo());
+        roster.updateRole(Bukkit.getOfflinePlayer(event.getfPlayer().getName()).getUniqueId(), event.getTo());
     }
 }

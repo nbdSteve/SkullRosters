@@ -72,3 +72,6 @@ faction-full-join:
 
 faction-full:
   - '&5&lRosters&d| &7You can not join your faction yet because the maximum amount of members are on.'
+
+player-join:
+  - '&c[!] &a{role-prefix}{player} &7joined your faction.'

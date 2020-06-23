@@ -1,5 +1,5 @@
 
-i
-java:S1192""MDefine a constant instead of duplicating this literal "faction-size" 3 times.(®ÔöJ8Ä±Ó¨©.
 o
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ê½Æ8’ŸÔ¨©.
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(ê½Æ8’ŸÔ¨©.
+g
+java:S1128"ERemove this unused import 'gg.steve.skullwars.rosters.utils.LogUtil'.(£Ú‘üÿÿÿÿ8²ÑË¶©.

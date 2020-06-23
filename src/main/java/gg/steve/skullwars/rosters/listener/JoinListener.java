@@ -9,6 +9,7 @@ import gg.steve.skullwars.rosters.core.Roster;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.message.MessageType;
 import gg.steve.skullwars.rosters.utils.ColorUtil;
+import gg.steve.skullwars.rosters.utils.LogUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -51,7 +52,7 @@ public class JoinListener implements Listener {
                 break;
             }
         }
-        if (off == null || roster.getFaciton().getSize() + add >= Files.CONFIG.get().getInt("faction-size")) {
+        if (off == null) {
             if (Files.CONFIG.get().getBoolean("roster-full-kick")) {
                 event.setJoinMessage("");
                 kicked.add(event.getPlayer().getUniqueId());
