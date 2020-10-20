@@ -85,12 +85,12 @@ public class CommandListener implements Listener {
             CommandDebug.ONLY_LEADER_CAN_EDIT.message(event.getPlayer());
             return;
         }
-        if (!roster.hasAddsRemaining()) {
-            CommandDebug.NO_ADDS_REMAINING.message(event.getPlayer(), fPlayer.getName());
-            return;
-        }
         switch (args[2].toLowerCase()) {
             case "add":
+                if (!roster.hasAddsRemaining()) {
+                    CommandDebug.NO_ADDS_REMAINING.message(event.getPlayer(), fPlayer.getName());
+                    return;
+                }
                 if (roster.isOnRoster(player.getUniqueId())) {
                     CommandDebug.ALREADY_ON_ROSTER.message(event.getPlayer(), player.getName());
                     return;
@@ -211,12 +211,15 @@ public class CommandListener implements Listener {
             }
         }
         if (off == null) {
+            event.setCancelled(true);
             MessageType.FACTION_FULL.message(event.getPlayer());
             return;
         }
+        event.setCancelled(true);
         roster.getFaciton().addFPlayer(fPlayer);
         fPlayer.setFaction(roster.getFaciton(), false);
         fPlayer.setRole(roster.getRole(fPlayer.getPlayer().getUniqueId()));
+        MessageType.PLAYER_JOIN.factionMessage(fPlayer.getFaction(), fPlayer.getRolePrefix(), fPlayer.getName());
         MessageType.PLAYER_REMOVE.factionMessage(roster.getFaciton(), off.getName(), fPlayer.getName());
     }
 }

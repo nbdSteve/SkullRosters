@@ -25,6 +25,7 @@ public class FactionEventListener implements Listener {
     @EventHandler
     public void invite(FPlayerJoinEvent event) {
         // rosters code
+        if (event.getfPlayer().isAdminBypassing()) return;
         if (event.getReason().equals(FPlayerJoinEvent.PlayerJoinReason.CREATE)) {
             FactionRosterManager.addRoster(event.getFaction());
             Roster roster = FactionRosterManager.getRoster(event.getFaction());
@@ -81,6 +82,7 @@ public class FactionEventListener implements Listener {
         if (!SkullRosters.isRosters() || !Files.CONFIG.get().getBoolean("leave-kick-affect-roster-size"))
             return;
         if (event.getReason().equals(FPlayerLeaveEvent.PlayerLeaveReason.DISBAND)) return;
+        if (event.getfPlayer().isAdminBypassing()) return;
         Roster roster = FactionRosterManager.getRoster(event.getFaction());
         roster.removePlayer(event.getfPlayer().getPlayer().getUniqueId());
         MessageType.ROSTER_REMOVE.factionMessage(roster.getFaciton(), event.getfPlayer().getName());
@@ -95,6 +97,7 @@ public class FactionEventListener implements Listener {
     @EventHandler
     public void role(FPlayerRoleChangeEvent event) {
         if (!SkullRosters.isRosters()) return;
+        if (event.getfPlayer().isAdminBypassing()) return;
         Roster roster = FactionRosterManager.getRoster(event.getFaction());
         roster.updateRole(Bukkit.getOfflinePlayer(event.getfPlayer().getName()).getUniqueId(), event.getTo());
     }

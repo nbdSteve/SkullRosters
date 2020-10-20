@@ -1,12 +1,12 @@
 
 l
 java:S1192"JDefine a constant instead of duplicating this literal "{faction}" 6 times.(¨¦À¥øÿÿÿÿ8ÍœÆ¥£.
-K
-java:S1172@"/Remove this unused method parameter "receiver".(„üB8°Å˜’£.
 g
 java:S1192"JDefine a constant instead of duplicating this literal "{player}" 13 times.(ü±»„8ì×Ó‘£.
-k
-java:S1192"IDefine a constant instead of duplicating this literal "{amount}" 5 times.(Ç–¸ÿÿÿÿÿÿ8¿Ù¾‚¤.
+]	java:S125F"<This block of commented-out lines of code should be removed.(ßø§¯şÿÿÿÿ8°Å˜’£.
 R
 java:S30662"<Lower the visibility of this setter or remove it altogether.(ÇşüØ
-]	java:S125F"<This block of commented-out lines of code should be removed.(ßø§¯şÿÿÿÿ8°Å˜’£.
+K
+java:S1172@"/Remove this unused method parameter "receiver".(„üB8°Å˜’£.
+k
+java:S1192"IDefine a constant instead of duplicating this literal "{amount}" 5 times.(Ç–¸ÿÿÿÿÿÿ8¿Ù¾‚¤.

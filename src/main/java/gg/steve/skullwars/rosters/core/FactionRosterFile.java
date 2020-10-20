@@ -1,5 +1,6 @@
 package gg.steve.skullwars.rosters.core;
 
+import com.massivecraft.factions.Factions;
 import gg.steve.skullwars.rosters.SkullRosters;
 import gg.steve.skullwars.rosters.managers.Files;
 import gg.steve.skullwars.rosters.utils.LogUtil;
@@ -10,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FactionRosterFile {
     //Store the file name string
@@ -42,7 +44,13 @@ public class FactionRosterFile {
             config.set("remaining-invites", Files.CONFIG.get().getInt("faction-size") + Files.CONFIG.get().getInt("invites-after-grace"));
         }
         config.set("adds-remaining", Files.CONFIG.get().getInt("roster-size") - 1);
-        config.set("players", new ArrayList<String>());
+        List<String> players = new ArrayList<>();
+        try {
+            players.add(Factions.getInstance().getFactionById(factionId).getFPlayerLeader().getPlayer().getUniqueId() + ":" + Factions.getInstance().getFactionById(factionId).getFPlayerLeader().getRole().name());
+        } catch (NullPointerException e) {
+            LogUtil.info(factionId);
+        }
+        config.set("players", players);
         //Send a nice message
         LogUtil.info("Successfully created a new faction roster file for faction with id: " + fileName + ", defaults have been set.");
     }

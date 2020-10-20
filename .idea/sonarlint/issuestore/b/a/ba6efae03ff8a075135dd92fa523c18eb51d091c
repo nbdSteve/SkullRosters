@@ -1,9 +1,9 @@
 
 K
-java:S1066X"/Merge this if statement with the enclosing one.(¹Ö™8Ôµ€„§.
-c
-java:S2259>"AA "NullPointerException" could be thrown; "off" is nullable here.(›ÉíÇşÿÿÿÿ8€³ ı£.
+java:S1066Z"/Merge this if statement with the enclosing one.(¹Ö™8Ôµ€„§.
 t
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¦û¦şÿÿÿÿ8€³ ı£.
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(¦û¦şÿÿÿÿ8€³ ı£.
+c
+java:S2259?"AA "NullPointerException" could be thrown; "off" is nullable here.(›ÉíÇşÿÿÿÿ8€³ ı£.
 Z
-java:S1874c"8Remove this use of "getOfflinePlayer"; it is deprecated.(îİ‰Ïÿÿÿÿÿ8Œ³¶©.
+java:S1874f"8Remove this use of "getOfflinePlayer"; it is deprecated.(îİ‰Ïÿÿÿÿÿ8Œ³¶©.
