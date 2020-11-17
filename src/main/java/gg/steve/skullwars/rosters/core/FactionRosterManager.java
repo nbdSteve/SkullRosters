@@ -49,6 +49,7 @@ public class FactionRosterManager {
     }
 
     public static void disband(Faction faction) {
+        if (!rosters.containsKey(faction)) addRoster(faction);
         rosters.get(faction).delete();
         rosters.remove(faction);
     }

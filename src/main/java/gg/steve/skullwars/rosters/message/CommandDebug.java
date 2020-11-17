@@ -15,7 +15,7 @@ public enum CommandDebug {
     ALREADY_ON_ROSTER("already-on-roster", "{player}"),
     ONLY_LEADER_CAN_EDIT("only-leader-can-edit"),
     NO_ADDS_REMAINING("no-adds-remaining", "{player}"),
-    INCORRECT_ARGS("incorrect_args"),
+    INCORRECT_ARGS("incorrect-args"),
     INVALID_COMMAND("invalid-command"),
     ROSTERS_NOT_ENABLED("rosters-not-enabled"),
     ROSTER_DOES_NOT_EXIST("roster-does-not-exist"),
