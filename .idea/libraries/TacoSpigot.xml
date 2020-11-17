@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="TacoSpigot">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/main/lib/TacoSpigot.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
